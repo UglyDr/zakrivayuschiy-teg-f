@@ -8,6 +8,7 @@
 :root.theme-dark {
   --main_font: "Inter";
   --accent_font: "Press Start 2P";
+  --main-font-weight: 465;
   --main-color: #000;
   --main-text-color: #00cc14;
   --like-heart-color: #ff0000;
@@ -27,6 +28,7 @@
 :root.theme-light {
   --main_font: "Inter";
   --accent_font: "Press Start 2P";
+  --main-font-weight: 400;
   --main-color: #fff;
   --main-text-color: #000;
   --like-heart-color: #ff0000;

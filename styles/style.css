@@ -16,6 +16,7 @@
 
 .page {
   font-family: var(--main_font), sans-serif;
+  font-variation-settings: "wght" var(--main-font-weight);
   min-inline-size: 320px;
   min-block-size: 100dvb;
   background-color: var(--main-color);
