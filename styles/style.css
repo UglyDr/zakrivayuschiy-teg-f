@@ -381,3 +381,10 @@
     height: 29px;
   }
 }
+
+@supports (-webkit-text-stroke: 1px var(--main-text-color)) {
+  .text-above-image {
+    -webkit-text-stroke: 1px var(--main-color);
+    text-shadow: none;
+  }
+}

@@ -84,7 +84,7 @@
 }
 
 @keyframes animation__arrow {
-    from{
+    from {
         transform: translateX(0px);
     }
     to {
@@ -103,10 +103,10 @@
 }
 
 @keyframes animation_icon {
-    from{
+    from {
         transform: scale(1);
     }
-    to{
+    to {
         transform: scale(1.5);
     }
 }
