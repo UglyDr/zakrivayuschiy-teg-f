@@ -28,6 +28,7 @@
   background-position: center;
   background-attachment: fixed;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .header {
@@ -43,7 +44,7 @@
 }
 
 .header__title {
-  font-family: var(--accent_font), sans-serif;
+  font-family: var(--accent_font), fantasy;
   font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
   font-weight: 400;
   line-height: 49px;
@@ -52,7 +53,7 @@
 }
 
 .header__text {
-  font-family: var(--accent_font), sans-serif;
+  font-family: var(--accent_font), fantasy;
   font-size: clamp(0.875rem, 0.6769rem + 0.8451vw, 1.4375rem);
   font-weight: 400;
   line-height: 14px;
@@ -70,7 +71,7 @@
 }
 
 .theme-menu__button {
-  font-family: var(--accent_font, sans-serif);
+  font-family: var(--accent_font), fantasy;
   font-weight: 400;
   font-size: 14px;
   position: relative;
@@ -122,14 +123,19 @@
   transform: scaleX(1);
 }
 
+.theme-menu__button:hover {
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
 .main {
   width: clamp(375px, 50%, 700px);
-  background-color: var(--main-color);
 }
 
 .section_card {
   border: 2px solid var(--main-text-color);
   margin-bottom: 52px;
+  background-color: var(--main-color);
 }
 
 .section_image {
@@ -140,18 +146,18 @@
 
 .section_title {
   padding: 5px 10px;
-  font-family: var(--main_font);
+  font-family: var(--main_font), sans-serif;
   font-size: 18px;
-  font-weight: 700;
+  font-variation-settings: var(bold-font-weight);
   color: var(--main-text-color);
 }
 
 .decor_text {
   position: absolute;
   z-index: 1;
-  inset-inline-end: 11px;
-  inset-block-start: 23px;
-  font-family: var(--accent_font), sans-serif;
+  inset-inline-end: 25px;
+  inset-block-start: 25px;
+  font-family: var(--accent_font), fantasy;
   font-weight: 400;
   font-size: 14px;
   opacity: 2.5;
@@ -167,7 +173,7 @@
 }
 
 .section_text {
-  font-family: var(--main_font);
+  font-family: var(--main_font), sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 117%;
@@ -176,15 +182,12 @@
   gap: 27px;
 }
 
-.additional_section_text {
-  padding-top: 27px;
-}
-
 .section__button {
   display: flex;
   justify-content: end;
   margin: 0px 25px 20px;
   margin-top: 23px;
+  gap: 6px;
 }
 
 .card__icon-button {
@@ -207,6 +210,9 @@
   background-color: var(--main-color);
   min-width: 130px;
   margin-bottom: 3px;
+}
+
+.button {
   border: 2px solid var(--main-text-color);
   display: flex;
   justify-content: center;
@@ -220,20 +226,31 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
-  left: 0;
+  top: 0px;
+  left: 0px;
+  width: 0px;
   background-color: var(--main-text-color);
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
   z-index: 1;
 }
 
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  box-shadow: 2px 2px 0 0 var(--main-text-color);
+  transition: box-shadow 0.5s ease-in-out;
+}
+
 .button:hover:before {
+  width: 100%;
   transform: translateX(0);
 }
 
 .button__text {
-  font-family: var(--accent_font), sans-serif;
+  font-family: var(--accent_font), fantasy;
   font-weight: 400;
   font-size: 14px;
   line-height: 90%;
@@ -272,12 +289,10 @@
   filter: hue-rotate(70deg) opacity(0.8);
 }
 
-.footer {
+.lower_button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: clamp(375px, 50%, 700px);
-  background-color: var(--main-color);
 }
 
 .footer__button {
@@ -296,7 +311,7 @@
 }
 
 .footer__button-text {
-  font-family: var(--accent_font);
+  font-family: var(--accent_font), fantasy;
   font-weight: 400;
   font-size: 14px;
   line-height: 90%;
@@ -318,7 +333,7 @@
   background-color: rgb(0 0 0 / 0.75);
 }
 
-.dialog {
+.dialog[open] {
   background-color: var(--main-color);
   padding: 30px 40px;
   max-width: 353px;
@@ -347,11 +362,15 @@
 }
 
 .dialog__title {
-  font-family: var(--accent_font);
+  font-family: var(--accent_font), fantasy;
   font-weight: 400;
   font-size: 14px;
   color: var(--main-text-color);
   line-height: 150%;
+  text-transform: uppercase;
+}
+
+.dialog_button-text {
   text-transform: uppercase;
 }
 
@@ -373,6 +392,11 @@
     padding-bottom: 5px;
   }
 
+  .decor_text {
+    inset-inline-end: 11px;
+    inset-block-start: 23px;
+  }
+
   .footer__button {
     flex-direction: column;
   }
@@ -383,9 +407,13 @@
   }
 }
 
-@supports (-webkit-text-stroke: 1px var(--main-text-color)) {
-  .text-above-image {
-    -webkit-text-stroke: 1px var(--main-color);
+@supports (
+  (text-stroke: 1px var(--label-stroke-color, #fff)) or
+    (-webkit-text-stroke: 1px var(--label-stroke-color, #fff))
+) {
+  .decor_text {
+    -webkit-text-stroke: 1px var(--label-stroke-color, #fff);
+    text-stroke: 1px var(--label-stroke-color, #fff);
     text-shadow: none;
   }
 }
